@@ -1,7 +1,7 @@
 id=cache_cleaner
 name=Cache Cleaner
-version=v4.0
-versionCode=20241005
+version=v4.1
+versionCode=20241103
 author=taamarin.t.me
 description=This will clear the cache of all apps if the total exceeds 1GB
 updateJson=https://github.com/taamarin/cleaner/raw/master/update.json
