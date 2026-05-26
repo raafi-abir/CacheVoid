@@ -13,8 +13,8 @@ current_time=$(date +"%I:%M %P")
 
 PROPFILE="/data/adb/modules/cache_cleaner/module.prop"
 
-# “At minute 0 past every 6th hour.”
-schedule_cleaner="0 */6 * * *"
+# Every day at 12:00 AM.
+schedule_cleaner="0 0 * * *"
 
 # Define the log function
 log() {
@@ -73,19 +73,11 @@ run_otomatis() {
 
   log info "total Cache: ${total_cache}"
 
-  size_cache=1024000 # Set size limit for Cache (in KB)
-
-  if [ "$total" -gt "$size_cache" ]; then
-    log info "Cleaning apps cache..."
-    run_cleaner # call the cleaner function
-    log info "Done! The apps cache has been cleaned!"
-    # Use the escaped variable in the sed command
-    sed -Ei "s/^description=(\\[.*][[:space:]]*)?/description=[ $current_time | 🥰 Total cache: ${escaped_total_cache}, Done! The apps cache has been cleaned! ] /g" "$PROPFILE"
-  else
-    log info "skip cleaning! Cache size is not yet ${size_cache} KB"
-    # Use the escaped variable in the sed command
-    sed -Ei "s/^description=(\\[.*][[:space:]]*)?/description=[ $current_time | 😍 Total cache: ${escaped_total_cache}, Skip cleaning!! ] /g" "$PROPFILE"
-  fi
+  log info "Cleaning apps cache..."
+  run_cleaner # call the cleaner function
+  log info "Done! The apps cache has been cleaned!"
+  # Use the escaped variable in the sed command
+  sed -Ei "s/^description=(\\[.*][[:space:]]*)?/description=[ $current_time | 🥰 Total cache: ${escaped_total_cache}, Done! The apps cache has been cleaned! ] /g" "$PROPFILE"
 
   log info "Have you ever jumped over these bushes?"
 }
@@ -122,7 +114,6 @@ display_pid() {
 }
 
 start_cleaner() {
-  run_otomatis
   run_crond
   display_pid
 }
