@@ -14,12 +14,9 @@ It will clean the cache in the following directories:
   "/sdcard/Android/data/*/cache/*"
   "/data/system/dropbox/*"
 ```
-If the total reaches 1GB, the checking will be done every 6 hours.
+Cache cleaning runs automatically every day at **12:00 AM**.
 
 open **/data/adb/cleaner/cleaner.service**,to make changes:
-
-limit size (KB)
-https://github.com/taamarin/cleaner/blob/e79c4645ad3a7119ce8cacd90617beee0c862e48/cleaner/cleaner.service#L78
 
 Checking interval
 https://github.com/taamarin/cleaner/blob/e79c4645ad3a7119ce8cacd90617beee0c862e48/cleaner/cleaner.service#L16
